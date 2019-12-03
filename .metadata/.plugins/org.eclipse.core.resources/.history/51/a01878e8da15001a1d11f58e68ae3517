@@ -22,7 +22,7 @@ public class Config {
 	
 	@Bean
 	HeadersExchange headerExchange() {
-		return new HeadersExchange("Exchanger");
+		return new HeadersExchange("place-Exchanger");
 	}
 
 	@Bean

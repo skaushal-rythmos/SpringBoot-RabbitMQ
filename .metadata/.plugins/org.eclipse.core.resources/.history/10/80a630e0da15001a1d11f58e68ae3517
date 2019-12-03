@@ -42,7 +42,7 @@ public class Controller {
 		messageProperties.setHeader("department", place.getCountry());
 		MessageConverter messageConverter = new SimpleMessageConverter();
 		Message message = messageConverter.toMessage(messageToBeSentToQueue, messageProperties);
-		amqpTemplate.send("Exchanger", "", message);
+		amqpTemplate.send("Exchange", "", message);
 
 		return "Message sent to the RabbitMQ Successfully";
 	}
