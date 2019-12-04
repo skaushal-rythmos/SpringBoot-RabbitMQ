@@ -37,12 +37,14 @@ public class Controller {
 		//System.out.println(place.getId());
 		
 		
-        String messageToBeSentToQueue = "City: "+place.getCity()+"and Country: "+place.getCountry()+" is added to RabbitQueue with Id:"+place.getId();
+        String messageToBeSentToQueue = "City: "+place.getCity()+" and Country: "+place.getCountry()+" is added to RabbitQueue with Id:"+place.getId();
 		MessageProperties messageProperties = new MessageProperties();
 		messageProperties.setHeader("department", place.getCountry());
 		MessageConverter messageConverter = new SimpleMessageConverter();
 		Message message = messageConverter.toMessage(messageToBeSentToQueue, messageProperties);
 		amqpTemplate.send("Exchanger", "", message);
+		
+		
 
 		return "Message sent to the RabbitMQ Successfully";
 	}

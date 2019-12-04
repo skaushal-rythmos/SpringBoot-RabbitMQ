@@ -2,6 +2,7 @@ package com.example.demo.Configuration;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.HeadersExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
@@ -18,11 +19,21 @@ public class Config {
 	Queue ForeignQueue() {
 		return new Queue("ForeignQueue", true);
 	}
+	
+	@Bean
+	Queue UnroutedMessagesQueue() {
+		return new Queue("UnroutedMessagesQueue", true);
+	}
     
 	
 	@Bean
 	HeadersExchange headerExchange() {
 		return new HeadersExchange("Exchanger");
+	}
+	
+	@Bean
+	FanoutExchange fanoutExchange() {
+		return new FanoutExchange("UnroutedMessagesExchanger");
 	}
 
 	@Bean
@@ -31,8 +42,14 @@ public class Config {
 	}
 
 	@Bean
-	Binding europeBinding(Queue ForeignQueue, HeadersExchange headerExchange) {
+	Binding foreignBinding(Queue ForeignQueue, HeadersExchange headerExchange) {
 		return BindingBuilder.bind(ForeignQueue).to(headerExchange).where("department").matches("Foreign");
 	}
+	
+	@Bean
+	Binding UnroutedMessagesBinding(Queue UnroutedMessagesQueue, FanoutExchange fanoutExchange) {
+		return BindingBuilder.bind(UnroutedMessagesQueue).to(fanoutExchange);
+	}
+	
 
 }
