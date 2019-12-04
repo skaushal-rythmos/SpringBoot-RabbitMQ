@@ -8,6 +8,8 @@
   To set Time-to-Live and Expiration policies the queues
 
   $ rabbitmqctl set_policy TTL ".*" '{"message-ttl":60000}' --apply-to queues
+
+  $ rabbitmqctl set_policy expiry ".*" '{"expires":1800000}' --apply-to queues
     
      60000(*60sec) is alterable.
  

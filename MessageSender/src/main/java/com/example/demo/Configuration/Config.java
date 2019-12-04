@@ -19,37 +19,35 @@ public class Config {
 	Queue ForeignQueue() {
 		return new Queue("ForeignQueue", true);
 	}
-	
+
 	@Bean
 	Queue UnroutedMessagesQueue() {
 		return new Queue("UnroutedMessagesQueue", true);
 	}
-    
-	
+
 	@Bean
 	HeadersExchange headerExchange() {
 		return new HeadersExchange("Exchanger");
 	}
-	
+
 	@Bean
 	FanoutExchange fanoutExchange() {
 		return new FanoutExchange("UnroutedMessagesExchanger");
 	}
 
 	@Bean
-	Binding asiaBinding(Queue IndianQueue, HeadersExchange headerExchange) {
-		return BindingBuilder.bind(IndianQueue).to(headerExchange).where("department").matches("India");
+	Binding indianBinding(Queue IndianQueue, HeadersExchange headerExchange) {
+		return BindingBuilder.bind(IndianQueue).to(headerExchange).where("Header").matches("India");
 	}
 
 	@Bean
 	Binding foreignBinding(Queue ForeignQueue, HeadersExchange headerExchange) {
-		return BindingBuilder.bind(ForeignQueue).to(headerExchange).where("department").matches("Foreign");
+		return BindingBuilder.bind(ForeignQueue).to(headerExchange).where("Header").matches("Foreign");
 	}
-	
+
 	@Bean
 	Binding UnroutedMessagesBinding(Queue UnroutedMessagesQueue, FanoutExchange fanoutExchange) {
 		return BindingBuilder.bind(UnroutedMessagesQueue).to(fanoutExchange);
 	}
-	
 
 }

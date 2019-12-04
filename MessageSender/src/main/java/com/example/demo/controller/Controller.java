@@ -18,36 +18,31 @@ import com.example.demo.model.PlacesService;
 
 @RestController
 public class Controller {
-	
+
 	@Autowired
 	private PlacesService placesService;
-	
-	
+
 	@Autowired
 	private AmqpTemplate amqpTemplate;
-	
+
 	@RequestMapping("/all")
-	public List<Places> getAllPlaces(){
+	public List<Places> getAllPlaces() {
 		return placesService.getAllplaces();
 	}
-	
-	@RequestMapping(method=RequestMethod.POST,value = "/send")
+
+	@RequestMapping(method = RequestMethod.POST, value = "/send")
 	public String addPlace(@RequestBody Places place) {
 		placesService.addplace(place);
-		//System.out.println(place.getId());
-		
-		
-        String messageToBeSentToQueue = "City: "+place.getCity()+" and Country: "+place.getCountry()+" is added to RabbitQueue with Id:"+place.getId();
+
+		String messageToBeSentToQueue = "City: " + place.getCity() + " and Country: " + place.getCountry()
+				+ " is added to RabbitQueue with Id:" + place.getId();
 		MessageProperties messageProperties = new MessageProperties();
-		messageProperties.setHeader("department", place.getCountry());
+		messageProperties.setHeader("Header", place.getCountry());
 		MessageConverter messageConverter = new SimpleMessageConverter();
 		Message message = messageConverter.toMessage(messageToBeSentToQueue, messageProperties);
 		amqpTemplate.send("Exchanger", "", message);
-		
-		
 
 		return "Message sent to the RabbitMQ Successfully";
 	}
-	
 
 }
