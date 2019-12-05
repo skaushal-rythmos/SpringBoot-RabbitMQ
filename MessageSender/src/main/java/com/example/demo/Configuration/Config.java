@@ -1,5 +1,8 @@
 package com.example.demo.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;
@@ -10,6 +13,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class Config {
+	
+	Map<String, Object> queueArguments = new HashMap<String, Object>();
+	
+	private void foo(){	
+		queueArguments.put("x-expires", 1800000);
+	}
+	
 	@Bean
 	Queue IndianQueue() {
 		return new Queue("IndianQueue", true);
@@ -22,8 +32,10 @@ public class Config {
 
 	@Bean
 	Queue UnroutedMessagesQueue() {
-		return new Queue("UnroutedMessagesQueue", true);
+		foo();
+		return new Queue("UnroutedMessagesQueue", true ,false, false, queueArguments);
 	}
+	
 
 	@Bean
 	HeadersExchange headerExchange() {
