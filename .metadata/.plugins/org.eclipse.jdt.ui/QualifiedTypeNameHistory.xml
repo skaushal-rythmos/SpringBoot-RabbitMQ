@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.springframework.amqp.core.MessageListener"/>
+<fullyQualifiedTypeName name="org.springframework.amqp.core.Message"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="com.rabbitmq.client.AMQP.Channel"/>
+<fullyQualifiedTypeName name="org.springframework.amqp.rabbit.connection.ConnectionFactory"/>
+<fullyQualifiedTypeName name="com.rabbitmq.client.ConnectionFactory"/>
+<fullyQualifiedTypeName name="com.rabbitmq.client.Channel"/>
+<fullyQualifiedTypeName name="org.springframework.amqp.rabbit.connection.Connection"/>
+<fullyQualifiedTypeName name="com.rabbitmq.client.AMQP.Connection"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="com.rabbitmq.client.Connection"/>
+<fullyQualifiedTypeName name="com.rabbitmq.client.impl.AMQImpl.Connection"/>
+</qualifiedTypeNameHistroy>
