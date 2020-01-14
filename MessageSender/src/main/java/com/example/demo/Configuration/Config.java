@@ -16,7 +16,7 @@ public class Config {
 	
 	Map<String, Object> queueArguments = new HashMap<String, Object>();
 	
-	private void foo(){	
+	private void addQueueArguments(){	
 		queueArguments.put("x-expires", 1800000);
 	}
 	
@@ -32,7 +32,7 @@ public class Config {
 
 	@Bean
 	Queue UnroutedMessagesQueue() {
-		foo();
+		addQueueArguments();
 		return new Queue("UnroutedMessagesQueue", true ,false, false, queueArguments);
 	}
 	
