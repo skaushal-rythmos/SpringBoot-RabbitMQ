@@ -1,6 +1,6 @@
 # SpringBoot-RabbitMQ
 
-  An SpringBoot application that takes the json object and forward it to the repective queues based on "Country" property in the json.
+  An SpringBoot application that takes the json object and forward it to the repective queues based on "Country" property in the json object.
 
 
   Commands needed:
