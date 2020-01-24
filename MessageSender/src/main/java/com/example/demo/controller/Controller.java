@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Places;
+import com.example.demo.model.PlacesObject;
 import com.example.demo.model.PlacesService;
 
 @RestController
@@ -21,13 +22,20 @@ public class Controller {
 
 	@Autowired
 	private PlacesService placesService;
+	
 
 	@Autowired
 	private AmqpTemplate amqpTemplate;
 
-	@RequestMapping("/all")
-	public List<Places> getAllPlaces() {
-		return placesService.getAllplaces();
+	@RequestMapping(method = RequestMethod.GET, value = "/all")
+	public PlacesObject getAllPlaces() {
+		
+		List<Places> jsonObject = placesService.getAllplaces();
+		PlacesObject placesObject = new PlacesObject();
+		placesObject.setPlacesObject(jsonObject);
+		return placesObject;
+		
+		
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/send")
@@ -42,7 +50,7 @@ public class Controller {
 		Message message = messageConverter.toMessage(messageToBeSentToQueue, messageProperties);
 		amqpTemplate.send("Exchanger", "", message);
 
-		return "Message sent to the RabbitMQ Successfully";
+		return "Sent to Rabbitmq Sucessfully with Id "+place.getId()+" and header value of message as "+place.getCountry()+".";
 	}
 
 }

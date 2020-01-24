@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class MessageConsumer implements MessageListener {
 
 	public void onMessage(Message IncomingMessage) {
-		System.out.println("Unrouted message from RabbitMq is " + new String(IncomingMessage.getBody()));
+		System.out.println("Message from RabbitMq is " + new String(IncomingMessage.getBody()));
 	}
 
 }

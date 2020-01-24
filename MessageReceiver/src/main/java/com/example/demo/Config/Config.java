@@ -14,19 +14,27 @@ import com.example.demo.Listner.MessageConsumer;
 @Configuration
 public class Config {
 
-	@Value("${queueName}")
-	String queueName;
 
 	@Bean
-	Queue queue() {
-		return new Queue(queueName, true);
+	Queue UnroutedMessagesQueue() {
+		return new Queue("UnroutedMessagesQueue", true);
+	}
+	
+	@Bean
+	Queue IndianQueue() {
+		return new Queue("IndianQueue", true);
+	}
+	
+	@Bean
+	Queue ForeignQueue() {
+		return new Queue("ForeignQueue", true);
 	}
 
 	@Bean
 	MessageListenerContainer messageListenerContainer(ConnectionFactory connectionFactory) {
 		SimpleMessageListenerContainer simpleMessageListenerContainer = new SimpleMessageListenerContainer();
 		simpleMessageListenerContainer.setConnectionFactory(connectionFactory);
-		simpleMessageListenerContainer.setQueues(queue());
+		simpleMessageListenerContainer.addQueues(UnroutedMessagesQueue(),IndianQueue(),ForeignQueue());
 		simpleMessageListenerContainer.setMessageListener(new MessageConsumer());
 		return simpleMessageListenerContainer;
 

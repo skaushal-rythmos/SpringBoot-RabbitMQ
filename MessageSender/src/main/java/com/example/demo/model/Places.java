@@ -5,6 +5,9 @@ public class Places {
 	private String id;
 	private String city;
 	private String country;
+	
+	public Places() {
+	}
 
 	public Places(String id, String city, String country) {
 

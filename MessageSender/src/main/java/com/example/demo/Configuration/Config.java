@@ -14,11 +14,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Config {
 	
-	Map<String, Object> queueArguments = new HashMap<String, Object>();
-	
-	private void addQueueArguments(){	
-		queueArguments.put("x-expires", 1800000);
-	}
+//	Map<String, Object> queueArguments = new HashMap<String, Object>();
+//	
+//	private void addQueueArguments(){	
+//		queueArguments.put("x-expires", 18000000);
+//	}
 	
 	@Bean
 	Queue IndianQueue() {
@@ -32,8 +32,9 @@ public class Config {
 
 	@Bean
 	Queue UnroutedMessagesQueue() {
-		addQueueArguments();
-		return new Queue("UnroutedMessagesQueue", true ,false, false, queueArguments);
+//		addQueueArguments();
+//		return new Queue("UnroutedMessagesQueue", true ,false, false, queueArguments);
+		return new Queue("UnroutedMessagesQueue", true);
 	}
 	
 
