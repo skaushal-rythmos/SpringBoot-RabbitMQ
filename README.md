@@ -15,7 +15,9 @@
  
   To set an alternate exchange to default exchange
 
-  $ rabbitmqctl set_policy AE "^ABC$" '{"alternate-exchange":"XYZ"}'
+  $ rabbitmqctl set_policy AE "^ABC$" '{"alternate-exchange":"XYZ"}':sasasa
 
     ABC - default exchange. 
     XYZ - Exchange to which unrouted message has to be routed.
+
+
